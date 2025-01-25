@@ -1,0 +1,28 @@
+package com.crio.rent_read.entity.enums;
+
+public enum Genre {
+    FICTION,
+    NON_FICTION,
+    MYSTERY,
+    FANTASY,
+    SCIENCE_FICTION,
+    HISTORICAL_FICTION,
+    ROMANCE,
+    THRILLER,
+    HORROR,
+    BIOGRAPHY,
+    AUTOBIOGRAPHY,
+    SELF_HELP,
+    PHILOSOPHY,
+    POETRY,
+    YOUNG_ADULT,
+    CHILDREN,
+    GRAPHIC_NOVEL,
+    CLASSICS,
+    RELIGION,
+    SPIRITUALITY,
+    HUMOR,
+    BUSINESS,
+    TECHNOLOGY,
+    EDUCATION
+}
