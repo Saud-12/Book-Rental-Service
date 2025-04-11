@@ -15,39 +15,42 @@ import java.nio.file.AccessDeniedException;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ApiError> handleResourceNotFoundException(ResourceNotFoundException exception){
+    public ResponseEntity<ApiResponse<?>> handleResourceNotFoundException(ResourceNotFoundException exception){
         ApiError apiError=new ApiError(exception.getMessage(), HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(apiError,apiError.getHttpStatus());
+        return buildErrorResponseEntity(apiError);
     }
 
     @ExceptionHandler(MaximumRentalLimitReachedException.class)
-    public ResponseEntity<ApiError> handleMaximumRentalLimitReachedException(MaximumRentalLimitReachedException exception){
+    public ResponseEntity<ApiResponse<?>> handleMaximumRentalLimitReachedException(MaximumRentalLimitReachedException exception){
         ApiError apiError=new ApiError(exception.getMessage(),HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(apiError,apiError.getHttpStatus());
+        return buildErrorResponseEntity(apiError);
     }
 
     @ExceptionHandler(BookIsNotAvailableForRentException.class)
-    public ResponseEntity<ApiError> handleBookIsNotAvailableForRentException(BookIsNotAvailableForRentException exception){
+    public ResponseEntity<ApiResponse<?>> handleBookIsNotAvailableForRentException(BookIsNotAvailableForRentException exception){
         ApiError apiError=new ApiError(exception.getMessage(),HttpStatus.CONFLICT);
-        return new ResponseEntity<>(apiError,apiError.getHttpStatus());
+        return buildErrorResponseEntity(apiError);
     }
 
     @ExceptionHandler(BookAlreadyReturnedException.class)
-    public ResponseEntity<ApiError> handleBookAlreadyReturnedException(BookAlreadyReturnedException exception){
+    public ResponseEntity<ApiResponse<?>> handleBookAlreadyReturnedException(BookAlreadyReturnedException exception){
         ApiError apiError=new ApiError(exception.getMessage(),HttpStatus.CONFLICT);
-        return new ResponseEntity<>(apiError,apiError.getHttpStatus());
+        return buildErrorResponseEntity(apiError);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<ApiError> handleAccessDeniedException(AccessDeniedException exception){
+    public ResponseEntity<ApiResponse<?>>  handleAccessDeniedException(AccessDeniedException exception){
         ApiError apiError=new ApiError(exception.getMessage(), HttpStatus.FORBIDDEN);
-        return new ResponseEntity<>(apiError,apiError.getHttpStatus());
+        return buildErrorResponseEntity(apiError);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiError> handleException(Exception exception){
+    public ResponseEntity<ApiResponse<?>> handleException(Exception exception){
         ApiError apiError=new ApiError(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        return new ResponseEntity<>(apiError,apiError.getHttpStatus());
+        return buildErrorResponseEntity(apiError);
+    }
+    private ResponseEntity<ApiResponse<?>> buildErrorResponseEntity(ApiError apiError) {
+        return new ResponseEntity<>(new ApiResponse<>(apiError),apiError.getHttpStatus());
     }
 
 }

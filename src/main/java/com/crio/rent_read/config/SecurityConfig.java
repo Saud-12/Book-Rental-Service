@@ -30,7 +30,8 @@ public class SecurityConfig {
         httpSecurity.csrf(csrfConfig->csrfConfig.disable());
         httpSecurity.authenticationProvider(authenticationProvider());
         httpSecurity.authorizeHttpRequests(configurer->
-                configurer.requestMatchers("/auth/**","/auth/login","/auth/signup").permitAll()
+                configurer.requestMatchers("/auth/**","/auth/login","/auth/signup","/swagger-ui/**",
+                                "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated());
         httpSecurity.httpBasic(Customizer.withDefaults());
         return httpSecurity.build();
